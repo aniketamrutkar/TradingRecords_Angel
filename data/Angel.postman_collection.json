@@ -1,0 +1,678 @@
+{
+	"info": {
+		"_postman_id": "42bbe768-1006-4a32-be95-295f56aa82d4",
+		"name": "Angel",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11544016"
+	},
+	"item": [
+		{
+			"name": "Mummy - Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let resposneData = pm.response.json()",
+							"pm.globals.set(\"mummy_jwtToken\", resposneData.data.jwtToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "TUOTya6a",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientcode\":\"J77302\",\n    \"password\":\"3816\",\n\t\"totp\":\"155429\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/auth/angelbroking/user/v1/loginByPassword",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"auth",
+						"angelbroking",
+						"user",
+						"v1",
+						"loginByPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mummy - OrderBook",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "TUOTya6a",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{mummy_jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/secure/angelbroking/order/v1/getOrderBook",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"secure",
+						"angelbroking",
+						"order",
+						"v1",
+						"getOrderBook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mummy-GetFunds",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "TUOTya6a",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{mummy_jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/secure/angelbroking/user/v1/getRMS",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"secure",
+						"angelbroking",
+						"user",
+						"v1",
+						"getRMS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Mummy-GetAllHolding",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "TUOTya6a",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{mummy_jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/secure/angelbroking/portfolio/v1/getAllHolding",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"secure",
+						"angelbroking",
+						"portfolio",
+						"v1",
+						"getAllHolding"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Papa - Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let resposneData = pm.response.json()",
+							"pm.globals.set(\"papa_jwtToken\", resposneData.data.jwtToken);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "VqJ4o4G6",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"clientcode\":\"W1573\",\n    \"password\":\"3816\",\n\t\"totp\":\"093864\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com//rest/auth/angelbroking/user/v1/loginByPassword",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"",
+						"rest",
+						"auth",
+						"angelbroking",
+						"user",
+						"v1",
+						"loginByPassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Papa - OrderBook",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "VqJ4o4G6",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{papa_jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/secure/angelbroking/order/v1/getOrderBook",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"secure",
+						"angelbroking",
+						"order",
+						"v1",
+						"getOrderBook"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Papa-GetFunds",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "VqJ4o4G6",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{papa_jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/secure/angelbroking/user/v1/getRMS",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"secure",
+						"angelbroking",
+						"user",
+						"v1",
+						"getRMS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Papa-GetAllHoldings",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "X-UserType",
+						"value": "USER",
+						"type": "text"
+					},
+					{
+						"key": "X-SourceID",
+						"value": "WEB",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientLocalIP",
+						"value": "CLIENT_LOCAL_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-ClientPublicIP",
+						"value": "CLIENT_PUBLIC_IP",
+						"type": "text"
+					},
+					{
+						"key": "X-MACAddress",
+						"value": "MAC_ADDRESS",
+						"type": "text"
+					},
+					{
+						"key": "X-PrivateKey",
+						"value": "VqJ4o4G6",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer {{papa_jwtToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://apiconnect.angelbroking.com/rest/secure/angelbroking/portfolio/v1/getAllHolding",
+					"protocol": "https",
+					"host": [
+						"apiconnect",
+						"angelbroking",
+						"com"
+					],
+					"path": [
+						"rest",
+						"secure",
+						"angelbroking",
+						"portfolio",
+						"v1",
+						"getAllHolding"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

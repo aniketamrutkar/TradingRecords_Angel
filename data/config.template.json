@@ -1,0 +1,32 @@
+{
+  "accounts": {
+    "mummy": {
+      "clientcode": "J77302",
+      "password": "YOUR_PASSWORD_HERE",
+      "privateKey": "TUOTya6a",
+      "totpSecret": "YOUR_MUMMY_TOTP_SECRET_HERE"
+    },
+    "papa": {
+      "clientcode": "W1573",
+      "password": "YOUR_PASSWORD_HERE",
+      "privateKey": "VqJ4o4G6",
+      "totpSecret": "YOUR_PAPA_TOTP_SECRET_HERE"
+    }
+  },
+  "api": {
+    "baseUrl": "apiconnect.angelbroking.com",
+    "headers": {
+      "Content-Type": "application/json",
+      "Accept": "application/json",
+      "X-UserType": "USER",
+      "X-SourceID": "WEB",
+      "X-ClientLocalIP": "CLIENT_LOCAL_IP",
+      "X-ClientPublicIP": "CLIENT_PUBLIC_IP",
+      "X-MACAddress": "MAC_ADDRESS"
+    }
+  },
+  "schedule": {
+    "time": "0 18 * * *",
+    "description": "Daily at 6:00 PM"
+  }
+}

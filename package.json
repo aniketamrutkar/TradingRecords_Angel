@@ -1,0 +1,27 @@
+{
+  "name": "GrandMixedMacroinstruction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "google-sheet.js",
+  "scripts": {
+    "setup": "node js/setup-totp.js",
+    "test-automation": "./scripts/test-automation.sh",
+    "start-scheduler": "./scripts/start-scheduler.sh",
+    "fetch-now": "node js/automated-fetch.js",
+    "manual-fetch": "node js/fetch-trade-data.js",
+    "generate-report": "node js/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "google-spreadsheet": "^3.1.15",
+    "googleapis": "^39.2.0",
+    "moment": "^2.27.0",
+    "node-schedule": "^2.1.1",
+    "otplib": "^12.0.1",
+    "speakeasy": "^2.0.0",
+    "underscore": "^1.10.2"
+  }
+}
