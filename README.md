@@ -28,8 +28,8 @@ This project automatically fetches trade data from Angel Broking APIs and genera
 
 ### 1. Get TOTP Codes
 Before running, get current TOTP codes from your Angel Broking authenticator app:
-- **Mummy Account (J77302)**: 6-digit TOTP code
-- **Papa Account (W1573)**: 6-digit TOTP code
+- **Mummy Account ()**: 6-digit TOTP code
+- **Papa Account ()**: 6-digit TOTP code
 
 ### 2. Run the Complete Process
 ```bash
