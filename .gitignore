@@ -1,29 +1,27 @@
-# Security - Never commit sensitive data
+# Sensitive configuration files
 data/config.json
-*.log
+.env
+.env.local
+.env.*.local
+
+# Logs
 logs/
-
-# Generated reports and backups
-bkp/
-
-# Node.js
-node_modules/
+*.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Environment variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Dependency directories
+node_modules/
 
-# IDE files
-.vscode/
-.idea/
-*.swp
-*.swo
+# AWS Lambda & Serverless
+.serverless/
+.serverless_plugins/
+.aws/
+
+# Generated reports and data
+bkp/
+response-*.json
 
 # OS generated files
 .DS_Store
@@ -34,11 +32,12 @@ yarn-error.log*
 ehthumbs.db
 Thumbs.db
 
-# Backup files
-*.bak
-*.backup
-*~
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Temporary files
-*.tmp
-*.temp
+# Build artifacts
+dist/
+build/

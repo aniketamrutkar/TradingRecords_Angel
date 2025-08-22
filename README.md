@@ -1,17 +1,39 @@
 # Angel Broking Trade Report Generator
 
-This project automatically fetches trade data from Angel Broking APIs and generates comprehensive trading reports.
+This project automatically fetches trade data from Angel Broking APIs and generates comprehensive trading reports. Now available in both **local** and **AWS Lambda serverless** versions!
 
 ## 🚨 **SECURITY WARNING**
 **NEVER commit `data/config.json` to public repositories!** This file contains TOTP secrets equivalent to your 2FA device. See [SECURITY.md](SECURITY.md) for details.
+
+## ✨ Choose Your Deployment
+
+### 🏠 Local Execution (Traditional)
+Run on your computer with scheduled tasks
+- ✅ Full control over environment
+- ✅ Local file storage
+- ❌ Requires computer always on
+- ❌ Manual server management
+
+### ☁️ AWS Lambda (Serverless) - **RECOMMENDED**
+Run automatically in the cloud
+- ✅ **Always available** - no computer needed
+- ✅ **Automatic scaling** and high availability  
+- ✅ **Email delivery** - reports sent directly to your inbox
+- ✅ **CloudWatch monitoring** with alerts
+- ✅ **Cost effective** - pay only for execution (~$1-2/month)
+- ✅ **Scheduled execution** via CloudWatch Events
+
+**🚀 [Quick Start with AWS Lambda](LAMBDA-QUICK-START.md)**
 
 ## Features
 
 - 🔐 **Automated Login**: Logs into both Mummy (J77302) and Papa (W1573) accounts
 - 📊 **Data Fetching**: Retrieves OrderBook data from Angel Broking APIs
 - 📈 **Report Generation**: Processes and formats trading data
-- 💾 **File Management**: Automatically saves data and generates reports
-- 🚀 **One-Command Execution**: Complete automation with a single command
+- 💾 **Smart Delivery**: Local files or email delivery
+- 🚀 **One-Command Execution**: Complete automation
+- ☁️ **Serverless Ready**: Deploy to AWS Lambda
+- 📱 **Health Monitoring**: Built-in health checks and alerts
 
 ## Files Overview
 
@@ -26,12 +48,31 @@ This project automatically fetches trade data from Angel Broking APIs and genera
 
 ## Quick Start
 
-### 1. Get TOTP Codes
+### ☁️ AWS Lambda (Recommended)
+
+```bash
+# 1. One-time setup
+npm run setup:aws
+
+# 2. Deploy to AWS  
+npm run lambda:deploy:dev
+
+# 3. Test it works
+npm run lambda:invoke
+```
+
+**That's it!** Your system now runs automatically in the cloud on weekdays at 5:00 PM IST.
+
+📖 **[Complete AWS Lambda Guide](AWS-LAMBDA-GUIDE.md)**
+
+### 🏠 Local Execution
+
+#### 1. Get TOTP Codes
 Before running, get current TOTP codes from your Angel Broking authenticator app:
 - **Mummy Account (J77302)**: 6-digit TOTP code
 - **Papa Account (W1573)**: 6-digit TOTP code
 
-### 2. Run the Complete Process
+#### 2. Run the Complete Process
 ```bash
 # Using shell script (recommended)
 ./run-trade-report.sh [mummy_totp] [papa_totp]
@@ -40,7 +81,7 @@ Before running, get current TOTP codes from your Angel Broking authenticator app
 ./run-trade-report.sh 123456 789012
 ```
 
-### 3. Alternative: Manual Node.js Execution
+#### 3. Alternative: Manual Node.js Execution
 ```bash
 # Fetch data and generate report
 node fetch-trade-data.js [mummy_totp] [papa_totp]

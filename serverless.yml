@@ -1,0 +1,163 @@
+service: trading-records-angel
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'ap-south-1'}
+  
+  # IAM role statements for Lambda function
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - ses:SendEmail
+            - ses:SendRawEmail
+            - ses:GetSendQuota
+            - ses:GetSendStatistics
+          Resource: "*"
+        - Effect: Allow
+          Action:
+            - ssm:GetParameter
+            - ssm:GetParameters
+            - ssm:GetParametersByPath
+          Resource: "arn:aws:ssm:${self:provider.region}:*:parameter/trading-records/*"
+        - Effect: Allow
+          Action:
+            - logs:CreateLogGroup
+            - logs:CreateLogStream
+            - logs:PutLogEvents
+          Resource: arn:aws:logs:*:*:*
+
+  # Environment variables (non-sensitive defaults)
+  environment:
+    STAGE: ${self:provider.stage}
+    MUMMY_CLIENT_CODE: J77302
+    PAPA_CLIENT_CODE: W1573
+    MUMMY_PRIVATE_KEY: TUOTya6a
+    PAPA_PRIVATE_KEY: VqJ4o4G6
+    CLIENT_LOCAL_IP: 192.168.1.1
+    CLIENT_PUBLIC_IP: 1.1.1.1
+    MAC_ADDRESS: aa:bb:cc:dd:ee:ff
+    # Email configuration - update these with your actual email addresses
+    FROM_EMAIL: ${param:fromEmail, 'aniketamrutkar@gmail.com'}
+    TO_EMAILS: ${param:toEmails, 'aniketamrutkar.social@gmail.com,dr.shreshankagrawal@gmail.com,aniketamrutkar@gmail.com,anupportfolio1@gmail.com'}
+    # Sensitive variables should be set via AWS Systems Manager Parameter Store
+    MUMMY_PASSWORD: ${param:mummyPassword, ''}
+    MUMMY_TOTP_SECRET: ${param:mummyTotpSecret, ''}
+    PAPA_PASSWORD: ${param:papaPassword, ''}
+    PAPA_TOTP_SECRET: ${param:papaTotpSecret, ''}
+
+custom:
+  # Serverless plugins
+  serverless-offline:
+    httpPort: 3000
+
+functions:
+  # Main trading data fetch function
+  fetchTradeData:
+    handler: lambda/handler.handler
+    name: ${self:service}-${self:provider.stage}-fetch-trade-data
+    description: Automated Angel Broking trade data fetching and processing
+    timeout: 300  # 5 minutes - enough time for API calls and processing
+    memorySize: 512  # MB - sufficient for data processing
+    
+    # Scheduled execution (weekdays at 5:00 PM IST = 11:30 AM UTC)
+    events:
+      - schedule:
+          rate: cron(30 11 ? * MON-FRI *)
+          description: "Weekday trade data fetch at 5:00 PM IST (Monday-Friday)"
+          enabled: true
+      
+      # Manual trigger via API Gateway (for testing)
+      - http:
+          path: /fetch
+          method: post
+          cors: true
+    
+    # Environment variables specific to this function
+    environment:
+      FUNCTION_NAME: fetchTradeData
+
+  # Health check function
+  healthCheck:
+    handler: lambda/health.handler
+    name: ${self:service}-${self:provider.stage}-health-check
+    description: Health check endpoint for the trading system
+    timeout: 30
+    memorySize: 128
+    
+    events:
+      - http:
+          path: /health
+          method: get
+          cors: true
+
+resources:
+  Resources:
+
+    # CloudWatch Log Group for better log management
+    FetchTradeDataLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        LogGroupName: /aws/lambda/${self:service}-${self:provider.stage}-fetch-trade-data
+        RetentionInDays: 30
+
+    HealthCheckLogGroup:
+      Type: AWS::Logs::LogGroup
+      Properties:
+        LogGroupName: /aws/lambda/${self:service}-${self:provider.stage}-health-check
+        RetentionInDays: 7
+
+    # CloudWatch Alarm for failed executions
+    TradingDataFetchFailureAlarm:
+      Type: AWS::CloudWatch::Alarm
+      Properties:
+        AlarmName: ${self:service}-${self:provider.stage}-fetch-failures
+        AlarmDescription: Alert when trading data fetch fails
+        MetricName: Errors
+        Namespace: AWS/Lambda
+        Statistic: Sum
+        Period: 300
+        EvaluationPeriods: 1
+        Threshold: 1
+        ComparisonOperator: GreaterThanOrEqualToThreshold
+        Dimensions:
+          - Name: FunctionName
+            Value: ${self:service}-${self:provider.stage}-fetch-trade-data
+        TreatMissingData: notBreaching
+
+  Outputs:
+    # Useful outputs for reference    
+    FunctionName:
+      Description: Name of the main Lambda function
+      Value: ${self:service}-${self:provider.stage}-fetch-trade-data
+      Export:
+        Name: ${self:service}-${self:provider.stage}-function-name
+
+plugins:
+  - serverless-offline
+
+# Package configuration
+package:
+  patterns:
+    - '!.git/**'
+    - '!.gitignore'
+    - '!README.md'
+    - '!TROUBLESHOOTING.md'
+    - '!AUTOMATION-GUIDE.md'
+    - '!PROJECT-STRUCTURE.md'
+    - '!SECURITY.md'
+    - '!data/**'
+    - '!bkp/**'
+    - '!logs/**'
+    - '!scripts/**'
+    - '!js/**'
+    - '!replit_zip_error_log.txt'
+    - 'lambda/**'
+    - 'package.json'
+    - 'package-lock.json'
+    - 'node_modules/**'

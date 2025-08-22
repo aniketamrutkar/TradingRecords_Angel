@@ -3,6 +3,11 @@ const fs = require('fs');
 const { execSync } = require('child_process');
 const speakeasy = require('speakeasy');
 
+// Helper function to add delay
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 // Load configuration
 let config;
 try {
@@ -123,7 +128,15 @@ async function login(accountType) {
     console.log(`🔐 Logging in to ${accountType} account (${account.clientcode})...`);
     
     // Try login with current TOTP first, then previous if needed
-    for (const totpCode of totpData.codes) {
+    for (let i = 0; i < totpData.codes.length; i++) {
+      const totpCode = totpData.codes[i];
+      
+      // Add delay between attempts (except for the first one)
+      if (i > 0) {
+        console.log(`⏳ Waiting 2 seconds before next attempt...`);
+        await delay(2000);
+      }
+      
       const loginData = {
         clientcode: account.clientcode,
         password: account.password,

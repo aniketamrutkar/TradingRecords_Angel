@@ -1,21 +1,32 @@
 {
-  "name": "GrandMixedMacroinstruction",
+  "name": "trading-records-angel",
   "version": "1.0.0",
-  "description": "",
-  "main": "google-sheet.js",
+  "description": "Automated Angel Broking trade data fetching and processing system with AWS Lambda support",
+  "main": "lambda/handler.js",
   "scripts": {
     "setup": "node js/setup-totp.js",
     "test-automation": "./scripts/test-automation.sh",
     "start-scheduler": "./scripts/start-scheduler.sh",
     "fetch-now": "node js/automated-fetch.js",
+    "fetch-and-email": "node js/automated-fetch-with-email.js",
     "manual-fetch": "node js/fetch-trade-data.js",
     "generate-report": "node js/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lambda:deploy": "serverless deploy",
+    "lambda:deploy:dev": "serverless deploy --stage dev",
+    "lambda:deploy:prod": "serverless deploy --stage prod",
+    "lambda:invoke": "serverless invoke --function fetchTradeData",
+    "lambda:logs": "serverless logs --function fetchTradeData --tail",
+    "lambda:remove": "serverless remove",
+    "lambda:offline": "serverless offline",
+    "lambda:package": "serverless package",
+    "setup:aws": "node lambda/setup-aws.js"
   },
-  "keywords": [],
+  "keywords": ["trading", "angel-broking", "automation", "aws-lambda", "serverless"],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1691.0",
     "google-spreadsheet": "^3.1.15",
     "googleapis": "^39.2.0",
     "moment": "^2.27.0",
@@ -23,5 +34,9 @@
     "otplib": "^12.0.1",
     "speakeasy": "^2.0.0",
     "underscore": "^1.10.2"
+  },
+  "devDependencies": {
+    "serverless": "^3.38.0",
+    "serverless-offline": "^13.3.0"
   }
 }
