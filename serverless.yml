@@ -4,7 +4,7 @@ frameworkVersion: '3'
 
 provider:
   name: aws
-  runtime: nodejs18.x
+  runtime: nodejs20.x
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'ap-south-1'}
   
@@ -35,10 +35,10 @@ provider:
   # Environment variables (non-sensitive defaults)
   environment:
     STAGE: ${self:provider.stage}
-    MUMMY_CLIENT_CODE: J77302
-    PAPA_CLIENT_CODE: W1573
-    MUMMY_PRIVATE_KEY: TUOTya6a
-    PAPA_PRIVATE_KEY: VqJ4o4G6
+    JPW_CLIENT_CODE: J77302
+    PEW_CLIENT_CODE: W1573
+    JPW_PRIVATE_KEY: TUOTya6a
+    PEW_PRIVATE_KEY: VqJ4o4G6
     CLIENT_LOCAL_IP: 192.168.1.1
     CLIENT_PUBLIC_IP: 1.1.1.1
     MAC_ADDRESS: aa:bb:cc:dd:ee:ff
@@ -46,10 +46,10 @@ provider:
     FROM_EMAIL: ${param:fromEmail, 'aniketamrutkar@gmail.com'}
     TO_EMAILS: ${param:toEmails, 'aniketamrutkar.social@gmail.com,dr.shreshankagrawal@gmail.com,aniketamrutkar@gmail.com,anupportfolio1@gmail.com'}
     # Sensitive variables should be set via AWS Systems Manager Parameter Store
-    MUMMY_PASSWORD: ${param:mummyPassword, ''}
-    MUMMY_TOTP_SECRET: ${param:mummyTotpSecret, ''}
-    PAPA_PASSWORD: ${param:papaPassword, ''}
-    PAPA_TOTP_SECRET: ${param:papaTotpSecret, ''}
+    JPW_PASSWORD: ${param:jpwPassword, ''}
+    JPW_TOTP_SECRET: ${param:jpwTotpSecret, ''}
+    PEW_PASSWORD: ${param:pewPassword, ''}
+    PEW_TOTP_SECRET: ${param:pewTotpSecret, ''}
 
 custom:
   # Serverless plugins

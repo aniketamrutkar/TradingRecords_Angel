@@ -4,8 +4,8 @@
 The automated system is generating TOTP codes but Angel Broking login is failing with "Invalid totp".
 
 ## Current Generated Codes
-- **Mummy Account**: 503203
-- **Papa Account**: 629652
+- **JPW Account**: 503203
+- **PEW Account**: 629652
 
 ## 🔍 Step-by-Step Troubleshooting
 
@@ -57,12 +57,12 @@ KHSU3FP4ESPGGX7JCJ6SYTUDZU
 Check in `config.json`:
 ```json
 {
-  "mummy": {
+  "jpw": {
     "clientcode": "J77302",
     "password": "3816",
     "privateKey": "TUOTya6a"
   },
-  "papa": {
+  "pew": {
     "clientcode": "W1573",
     "password": "3816", 
     "privateKey": "VqJ4o4G6"
@@ -143,7 +143,7 @@ node debug-totp.js
 ### Test with Original Fetch Script
 ```bash
 # Get codes from your app, then run:
-node fetch-trade-data.js [mummy_code] [papa_code]
+node fetch-trade-data.js [jpw_code] [pew_code]
 ```
 
 ## 📞 Next Steps

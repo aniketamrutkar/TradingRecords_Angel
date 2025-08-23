@@ -21,10 +21,10 @@ exports.handler = async (event, context) => {
     try {
       const ssm = new AWS.SSM();
       const parameterNames = [
-        '/trading-records/mummy/password',
-        '/trading-records/mummy/totp-secret',
-        '/trading-records/papa/password',
-        '/trading-records/papa/totp-secret',
+        '/trading-records/jpw/password',
+        '/trading-records/jpw/totp-secret',
+        '/trading-records/pew/password',
+        '/trading-records/pew/totp-secret',
         '/trading-records/email/from-address',
         '/trading-records/email/to-addresses'
       ];

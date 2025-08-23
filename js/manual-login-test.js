@@ -53,7 +53,7 @@ async function manualLoginTest() {
   console.log('');
   
   try {
-    for (const accountType of ['mummy', 'papa']) {
+    for (const accountType of ['jpw', 'pew']) {
       const account = config.accounts[accountType];
       
       console.log(`🔐 Testing ${accountType} account (${account.clientcode}):`);

@@ -16,7 +16,7 @@ console.log('🇮🇳 IST Time:', now.toLocaleString("en-US", {timeZone: "Asia/K
 console.log('');
 
 // Test both accounts with both libraries
-const accounts = ['mummy', 'papa'];
+const accounts = ['jpw', 'pew'];
 
 accounts.forEach(accountType => {
   const account = config.accounts[accountType];

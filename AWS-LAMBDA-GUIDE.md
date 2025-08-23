@@ -121,31 +121,31 @@ aws sts get-caller-identity
 Store your sensitive configuration in AWS Systems Manager Parameter Store:
 
 ```bash
-# Mummy account credentials
+# JPW account credentials
 aws ssm put-parameter \
-  --name "/trading-records/mummy/password" \
-  --value "YOUR_MUMMY_PASSWORD" \
+  --name "/trading-records/jpw/password" \
+  --value "YOUR_JPW_PASSWORD" \
   --type "SecureString" \
-  --description "Password for Mummy account (J77302)"
+  --description "Password for JPW account (J77302)"
 
 aws ssm put-parameter \
-  --name "/trading-records/mummy/totp-secret" \
-  --value "YOUR_MUMMY_TOTP_SECRET" \
+  --name "/trading-records/jpw/totp-secret" \
+  --value "YOUR_JPW_TOTP_SECRET" \
   --type "SecureString" \
-  --description "TOTP secret for Mummy account"
+  --description "TOTP secret for JPW account"
 
-# Papa account credentials  
+# PEW account credentials  
 aws ssm put-parameter \
-  --name "/trading-records/papa/password" \
-  --value "YOUR_PAPA_PASSWORD" \
+  --name "/trading-records/pew/password" \
+  --value "YOUR_PEW_PASSWORD" \
   --type "SecureString" \
-  --description "Password for Papa account (W1573)"
+  --description "Password for PEW account (W1573)"
 
 aws ssm put-parameter \
-  --name "/trading-records/papa/totp-secret" \
-  --value "YOUR_PAPA_TOTP_SECRET" \
+  --name "/trading-records/pew/totp-secret" \
+  --value "YOUR_PEW_TOTP_SECRET" \
   --type "SecureString" \
-  --description "TOTP secret for Papa account"
+  --description "TOTP secret for PEW account"
 
 # Email configuration
 aws ssm put-parameter \
@@ -207,16 +207,16 @@ The Lambda function uses these environment variables:
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `MUMMY_PASSWORD` | Mummy account password | - | ✅ |
-| `MUMMY_TOTP_SECRET` | Mummy TOTP secret | - | ✅ |
-| `PAPA_PASSWORD` | Papa account password | - | ✅ |
-| `PAPA_TOTP_SECRET` | Papa TOTP secret | - | ✅ |
+| `JPW_PASSWORD` | JPW account password | - | ✅ |
+| `JPW_TOTP_SECRET` | JPW TOTP secret | - | ✅ |
+| `PEW_PASSWORD` | PEW account password | - | ✅ |
+| `PEW_TOTP_SECRET` | PEW TOTP secret | - | ✅ |
 | `FROM_EMAIL` | Verified sender email address | - | ✅ |
 | `TO_EMAILS` | Comma-separated recipient emails | - | ✅ |
-| `MUMMY_CLIENT_CODE` | Mummy client code | J77302 | ❌ |
-| `PAPA_CLIENT_CODE` | Papa client code | W1573 | ❌ |
-| `MUMMY_PRIVATE_KEY` | Mummy private key | TUOTya6a | ❌ |
-| `PAPA_PRIVATE_KEY` | Papa private key | VqJ4o4G6 | ❌ |
+| `JPW_CLIENT_CODE` | JPW client code | J77302 | ❌ |
+| `PEW_CLIENT_CODE` | PEW client code | W1573 | ❌ |
+| `JPW_PRIVATE_KEY` | JPW private key | TUOTya6a | ❌ |
+| `PEW_PRIVATE_KEY` | PEW private key | VqJ4o4G6 | ❌ |
 
 ### Schedule Configuration
 
@@ -325,7 +325,7 @@ await cloudwatch.putMetricData({
 #### 1. **"Missing environment variables"**
 ```bash
 # Check if parameters exist
-aws ssm get-parameters --names "/trading-records/mummy/password" "/trading-records/mummy/totp-secret"
+aws ssm get-parameters --names "/trading-records/jpw/password" "/trading-records/jpw/totp-secret"
 
 # Re-create missing parameters
 npm run setup:aws

@@ -35,14 +35,14 @@ function createHtmlReport(reportData, summary) {
         <h1>📈 Angel Broking Trade Report</h1>
         <p><strong>Date:</strong> ${date}</p>
         <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
-        <p><strong>Accounts:</strong> Mummy (J77302) & Papa (W1573)</p>
+        <p><strong>Accounts:</strong> JPW (J77302) & PEW (W1573)</p>
     </div>
     
     <div class="summary">
         <h2>📊 Summary</h2>
         <ul>
-            <li><strong>Mummy Orders:</strong> ${summary.mummyOrders}</li>
-            <li><strong>Papa Orders:</strong> ${summary.papaOrders}</li>
+            <li><strong>JPW Orders:</strong> ${summary.jpwOrders}</li>
+            <li><strong>PEW Orders:</strong> ${summary.pewOrders}</li>
             <li><strong>Status:</strong> ✅ Successfully processed</li>
         </ul>
     </div>
@@ -134,8 +134,8 @@ async function fetchAndEmailReport() {
     
     // Create email content
     const summary = {
-      mummyOrders: data_jpw.length,
-      papaOrders: data_pew.length
+      jpwOrders: data_jpw.length,
+      pewOrders: data_pew.length
     };
     
     const reportData = {
@@ -148,8 +148,8 @@ async function fetchAndEmailReport() {
     const textBody = `Angel Broking Trade Report for ${date}
 
 Summary:
-- Mummy Orders: ${summary.mummyOrders}
-- Papa Orders: ${summary.papaOrders}
+- JPW Orders: ${summary.jpwOrders}
+- PEW Orders: ${summary.pewOrders}
 
 Detailed Report:
 ${reportContent}

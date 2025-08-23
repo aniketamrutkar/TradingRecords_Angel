@@ -27,7 +27,7 @@ Run automatically in the cloud
 
 ## Features
 
-- 🔐 **Automated Login**: Logs into both Mummy (J77302) and Papa (W1573) accounts
+- 🔐 **Automated Login**: Logs into both JPW (J77302) and PEW (W1573) accounts
 - 📊 **Data Fetching**: Retrieves OrderBook data from Angel Broking APIs
 - 📈 **Report Generation**: Processes and formats trading data
 - 💾 **Smart Delivery**: Local files or email delivery
@@ -42,8 +42,8 @@ Run automatically in the cloud
 | `fetch-trade-data.js` | Main automation script for API calls |
 | `index.js` | Trade data processing and report generation |
 | `run-trade-report.sh` | Shell script for easy execution |
-| `response-jpw.json` | OrderBook data for Mummy account (J77302) |
-| `response-pew.json` | OrderBook data for Papa account (W1573) |
+| `response-jpw.json` | OrderBook data for JPW account (J77302) |
+| `response-pew.json` | OrderBook data for PEW account (W1573) |
 | `bkp/[Month]/[Date].txt` | Generated trade reports |
 
 ## Quick Start
@@ -69,13 +69,13 @@ npm run lambda:invoke
 
 #### 1. Get TOTP Codes
 Before running, get current TOTP codes from your Angel Broking authenticator app:
-- **Mummy Account ()**: 6-digit TOTP code
-- **Papa Account ()**: 6-digit TOTP code
+- **JPW Account ()**: 6-digit TOTP code
+- **PEW Account ()**: 6-digit TOTP code
 
 #### 2. Run the Complete Process
 ```bash
 # Using shell script (recommended)
-./run-trade-report.sh [mummy_totp] [papa_totp]
+./run-trade-report.sh [jpw_totp] [pew_totp]
 
 # Example
 ./run-trade-report.sh 123456 789012
@@ -84,7 +84,7 @@ Before running, get current TOTP codes from your Angel Broking authenticator app
 #### 3. Alternative: Manual Node.js Execution
 ```bash
 # Fetch data and generate report
-node fetch-trade-data.js [mummy_totp] [papa_totp]
+node fetch-trade-data.js [jpw_totp] [pew_totp]
 
 # Or just process existing data
 node index.js
@@ -101,8 +101,8 @@ The system generates:
 - Total calculations
 
 ### Generated Files
-- `response-jpw.json` - Raw API data for Mummy account
-- `response-pew.json` - Raw API data for Papa account  
+- `response-jpw.json` - Raw API data for JPW account
+- `response-pew.json` - Raw API data for PEW account  
 - `bkp/[Month]/[Date].txt` - Formatted trade report
 
 ### Sample Report Format
@@ -138,8 +138,8 @@ The script uses Angel Broking APIs with the following endpoints:
 
 | Account | Client Code | Private Key | Description |
 |---------|-------------|-------------|-------------|
-| Mummy | J77302 | TUOTya6a | Primary trading account |
-| Papa | W1573 | VqJ4o4G6 | Secondary trading account |
+| JPW | J77302 | TUOTya6a | Primary trading account |
+| PEW | W1573 | VqJ4o4G6 | Secondary trading account |
 
 ## Data Processing
 
@@ -152,9 +152,9 @@ The system:
 
 ## Report Sections
 
-- **PEW**: Papa account data with quantities divided by 2
-- **JPW**: Mummy account data with original quantities  
-- **Actual PEW**: Papa account data with original quantities
+- **PEW**: PEW account data with quantities divided by 2
+- **JPW**: JPW account data with original quantities  
+- **Actual PEW**: PEW account data with original quantities
 
 ## Troubleshooting
 

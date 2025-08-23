@@ -14,8 +14,8 @@ TradeRecords/
 │
 ├── 📊 data/                      # All JSON data files
 │   ├── config.json              # TOTP secrets and configuration
-│   ├── response-jpw.json        # Latest Mummy account data
-│   ├── response-pew.json        # Latest Papa account data
+│   ├── response-jpw.json        # Latest JPW account data
+│   ├── response-pew.json        # Latest PEW account data
 │   ├── Angel.postman_collection.json  # Postman API collection
 │   ├── PLReport.json            # Historical P&L data
 │   └── credentials.json         # Empty credentials file
@@ -70,8 +70,8 @@ TradeRecords/
 ### 📊 Data Files
 | File | Location | Purpose |
 |------|----------|---------|
-| `response-jpw.json` | `data/` | Latest Mummy account OrderBook data |
-| `response-pew.json` | `data/` | Latest Papa account OrderBook data |
+| `response-jpw.json` | `data/` | Latest JPW account OrderBook data |
+| `response-pew.json` | `data/` | Latest PEW account OrderBook data |
 | `Angel.postman_collection.json` | `data/` | API endpoints and configuration |
 | `PLReport.json` | `data/` | Historical profit/loss data |
 
@@ -126,7 +126,7 @@ node js/manual-login-test.js
 
 # Manual execution
 node js/automated-fetch.js
-node js/fetch-trade-data.js [mummy_totp] [papa_totp]
+node js/fetch-trade-data.js [jpw_totp] [pew_totp]
 node js/index.js
 
 # Automation

@@ -23,7 +23,7 @@ console.log(`   Difference: ${systemTimestamp - istTimestamp} seconds`);
 console.log('');
 
 // Test both accounts
-const accounts = ['mummy', 'papa'];
+const accounts = ['jpw', 'pew'];
 
 accounts.forEach(accountType => {
   const account = config.accounts[accountType];

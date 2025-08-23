@@ -14,7 +14,7 @@ console.log('⏰ Unix Timestamp:', Math.floor(Date.now() / 1000));
 console.log('');
 
 // Test both accounts
-const accounts = ['mummy', 'papa'];
+const accounts = ['jpw', 'pew'];
 
 accounts.forEach(accountType => {
   const account = config.accounts[accountType];

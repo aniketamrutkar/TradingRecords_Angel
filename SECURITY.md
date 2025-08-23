@@ -73,9 +73,9 @@ For extra security, consider using environment variables:
 
 ```bash
 # Create .env file (also add to .gitignore)
-MUMMY_CLIENT_CODE=J77302
-MUMMY_PASSWORD=your_password
-MUMMY_TOTP_SECRET=your_secret
+JPW_CLIENT_CODE=J77302
+JPW_PASSWORD=your_password
+JPW_TOTP_SECRET=your_secret
 # ... etc
 ```
 

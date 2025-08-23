@@ -50,7 +50,7 @@ function makeRequest(options, postData = null) {
 // Generate TOTP code with speakeasy library and multiple timing windows
 function generateTOTP(secret) {
   try {
-    if (!secret || secret === 'YOUR_MUMMY_TOTP_SECRET_HERE' || secret === 'YOUR_PAPA_TOTP_SECRET_HERE') {
+    if (!secret || secret === 'YOUR_JPW_TOTP_SECRET_HERE' || secret === 'YOUR_PEW_TOTP_SECRET_HERE') {
       throw new Error('TOTP secret not configured');
     }
     
@@ -238,22 +238,22 @@ async function fetchTradeData() {
   try {
     // Login to both accounts
     logWithTimestamp('=== LOGIN PHASE ===');
-    const [mummyToken, papaToken] = await Promise.all([
-      login('mummy'),
-      login('papa')
+    const [jpwToken, pewToken] = await Promise.all([
+      login('jpw'),
+      login('pew')
     ]);
     
     logWithTimestamp('=== DATA FETCH PHASE ===');
     // Fetch OrderBook from both accounts
-    const [mummyOrderBook, papaOrderBook] = await Promise.all([
-      getOrderBook('mummy', mummyToken),
-      getOrderBook('papa', papaToken)
+    const [jpwOrderBook, pewOrderBook] = await Promise.all([
+      getOrderBook('jpw', jpwToken),
+      getOrderBook('pew', pewToken)
     ]);
     
     logWithTimestamp('=== SAVE DATA PHASE ===');
     // Save the responses
-    saveToFile('./data/response-jpw.json', mummyOrderBook); // Mummy (J77302) -> response-jpw.json
-    saveToFile('./data/response-pew.json', papaOrderBook);  // Papa (W1573) -> response-pew.json
+    saveToFile('./data/response-jpw.json', jpwOrderBook); // JPW (J77302) -> response-jpw.json
+    saveToFile('./data/response-pew.json', pewOrderBook);  // PEW (W1573) -> response-pew.json
     
     logWithTimestamp('=== PROCESSING PHASE ===');
     // Run the index.js script

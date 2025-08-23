@@ -39,31 +39,31 @@ async function setupTOTPSecrets() {
     }
 
     console.log('🔧 Current configuration:');
-    console.log(`   Mummy Account: ${config.accounts.mummy.clientcode}`);
-    console.log(`   Papa Account: ${config.accounts.papa.clientcode}`);
+    console.log(`   JPW Account: ${config.accounts.jpw.clientcode}`);
+    console.log(`   PEW Account: ${config.accounts.pew.clientcode}`);
     console.log('');
-    //PAPA - KHSU3FP4ESPGGX7JCJ6SYTUDZU
-    //MUMMY - CZNAVEKWXYEAXOZISJI7IMBF7E
+        //PEW - KHSU3FP4ESPGGX7JCJ6SYTUDZU
+    //JPW - CZNAVEKWXYEAXOZISJI7IMBF7E
 
-    // Get Mummy TOTP secret
-    console.log('👩 Setting up Mummy account TOTP secret:');
-    const mummySecret = await question('Enter TOTP secret for Mummy (J77302): ');
-    
-    if (mummySecret && mummySecret.trim() !== '') {
+    // Get JPW TOTP secret
+    console.log('👩 Setting up JPW account TOTP secret:');
+    const jpwSecret = await question('Enter TOTP secret for JPW (J77302): ');
+
+    if (jpwSecret && jpwSecret.trim() !== '') {
       // Test the secret
       try {
         const testToken = speakeasy.totp({
-          secret: mummySecret.trim(),
+          secret: jpwSecret.trim(),
           encoding: 'base32',
           time: Math.floor(Date.now() / 1000),
           step: 30,
           digits: 6,
           algorithm: 'sha1'
         });
-        console.log(`✅ Mummy TOTP secret valid. Test token: ${testToken}`);
-        config.accounts.mummy.totpSecret = mummySecret.trim();
+        console.log(`✅ JPW TOTP secret valid. Test token: ${testToken}`);
+        config.accounts.jpw.totpSecret = jpwSecret.trim();
       } catch (error) {
-        console.log('❌ Invalid TOTP secret for Mummy account');
+        console.log('❌ Invalid TOTP secret for JPW account');
         process.exit(1);
       }
     } else {
@@ -73,25 +73,25 @@ async function setupTOTPSecrets() {
 
     console.log('');
 
-    // Get Papa TOTP secret
-    console.log('👨 Setting up Papa account TOTP secret:');
-    const papaSecret = await question('Enter TOTP secret for Papa (W1573): ');
-    
-    if (papaSecret && papaSecret.trim() !== '') {
+        // Get PEW TOTP secret
+    console.log('👨 Setting up PEW account TOTP secret:');
+    const pewSecret = await question('Enter TOTP secret for PEW (W1573): ');
+
+    if (pewSecret && pewSecret.trim() !== '') {
       // Test the secret
       try {
         const testToken = speakeasy.totp({
-          secret: papaSecret.trim(),
+          secret: pewSecret.trim(),
           encoding: 'base32',
           time: Math.floor(Date.now() / 1000),
           step: 30,
           digits: 6,
           algorithm: 'sha1'
         });
-        console.log(`✅ Papa TOTP secret valid. Test token: ${testToken}`);
-        config.accounts.papa.totpSecret = papaSecret.trim();
+        console.log(`✅ PEW TOTP secret valid. Test token: ${testToken}`);
+        config.accounts.pew.totpSecret = pewSecret.trim();
       } catch (error) {
-        console.log('❌ Invalid TOTP secret for Papa account');
+        console.log('❌ Invalid TOTP secret for PEW account');
         process.exit(1);
       }
     } else {

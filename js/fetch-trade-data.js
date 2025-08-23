@@ -4,13 +4,13 @@ const { execSync } = require('child_process');
 
 // Configuration
 const config = {
-  mummy: {
+  jpw: {
     clientcode: "J77302",
     password: "3816",
     totp: "155429", // You'll need to update this with current TOTP
     privateKey: "TUOTya6a"
   },
-  papa: {
+  pew: {
     clientcode: "W1573", 
     password: "3816",
     totp: "093864", // You'll need to update this with current TOTP
@@ -144,22 +144,22 @@ async function main() {
   try {
     // Login to both accounts
     console.log('=== LOGIN PHASE ===');
-    const [mummyToken, papaToken] = await Promise.all([
-      login('mummy'),
-      login('papa')
+    const [jpwToken, pewToken] = await Promise.all([
+      login('jpw'),
+      login('pew')
     ]);
     
     console.log('\n=== DATA FETCH PHASE ===');
     // Fetch OrderBook from both accounts
-    const [mummyOrderBook, papaOrderBook] = await Promise.all([
-      getOrderBook('mummy', mummyToken),
-      getOrderBook('papa', papaToken)
+    const [jpwOrderBook, pewOrderBook] = await Promise.all([
+      getOrderBook('jpw', jpwToken),
+      getOrderBook('pew', pewToken)
     ]);
     
     console.log('\n=== SAVE DATA PHASE ===');
     // Save the responses
-    saveToFile('./data/response-jpw.json', mummyOrderBook); // Mummy (J77302) -> response-jpw.json
-    saveToFile('./data/response-pew.json', papaOrderBook);  // Papa (W1573) -> response-pew.json
+    saveToFile('./data/response-jpw.json', jpwOrderBook); // JPW (J77302) -> response-jpw.json
+    saveToFile('./data/response-pew.json', pewOrderBook);  // PEW (W1573) -> response-pew.json
     
     console.log('\n=== PROCESSING PHASE ===');
     // Run the index.js script
@@ -201,12 +201,12 @@ Note: TOTP codes change every 30 seconds. Get fresh codes from your authenticato
 
 // Update TOTP if provided as command line arguments
 if (process.argv[2]) {
-  config.mummy.totp = process.argv[2];
-  console.log(`📱 Updated Mummy TOTP: ${config.mummy.totp}`);
+  config.jpw.totp = process.argv[2];
+  console.log(`📱 Updated JPW TOTP: ${config.jpw.totp}`);
 }
 if (process.argv[3]) {
-  config.papa.totp = process.argv[3];
-  console.log(`📱 Updated Papa TOTP: ${config.papa.totp}`);
+  config.pew.totp = process.argv[3];
+  console.log(`📱 Updated PEW TOTP: ${config.pew.totp}`);
 }
 
 // Run the main function

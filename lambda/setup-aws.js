@@ -56,23 +56,23 @@ async function setupAWSParameters() {
   
   const parameters = [
     {
-      name: '/trading-records/mummy/password',
-      description: 'Password for Mummy account (J77302)',
+      name: '/trading-records/jpw/password',
+      description: 'Password for JPW account (J77302)',
       type: 'SecureString'
     },
     {
-      name: '/trading-records/mummy/totp-secret',
-      description: 'TOTP secret for Mummy account (J77302)',
+      name: '/trading-records/jpw/totp-secret',
+      description: 'TOTP secret for JPW account (J77302)',
       type: 'SecureString'
     },
     {
-      name: '/trading-records/papa/password',
-      description: 'Password for Papa account (W1573)',
+      name: '/trading-records/pew/password',
+      description: 'Password for PEW account (W1573)',
       type: 'SecureString'
     },
     {
-      name: '/trading-records/papa/totp-secret',
-      description: 'TOTP secret for Papa account (W1573)',
+      name: '/trading-records/pew/totp-secret',
+      description: 'TOTP secret for PEW account (W1573)',
       type: 'SecureString'
     },
     {
@@ -118,10 +118,10 @@ AWS_REGION=us-east-1
 STAGE=dev
 
 # Angel Broking Account Details (non-sensitive)
-MUMMY_CLIENT_CODE=J77302
-PAPA_CLIENT_CODE=W1573
-MUMMY_PRIVATE_KEY=TUOTya6a
-PAPA_PRIVATE_KEY=VqJ4o4G6
+JPW_CLIENT_CODE=J77302
+PEW_CLIENT_CODE=W1573
+JPW_PRIVATE_KEY=TUOTya6a
+PEW_PRIVATE_KEY=VqJ4o4G6
 
 # Network Configuration
 CLIENT_LOCAL_IP=192.168.1.1
@@ -134,10 +134,10 @@ TO_EMAILS=recipient1@example.com,recipient2@example.com
 
 # Sensitive Configuration (for local testing only - use AWS SSM in production)
 # Uncomment and fill these for local testing:
-# MUMMY_PASSWORD=your_mummy_password_here
-# MUMMY_TOTP_SECRET=your_mummy_totp_secret_here
-# PAPA_PASSWORD=your_papa_password_here
-# PAPA_TOTP_SECRET=your_papa_totp_secret_here
+# JPW_PASSWORD=your_jpw_password_here
+# JPW_TOTP_SECRET=your_jpw_totp_secret_here
+# PEW_PASSWORD=your_pew_password_here
+# PEW_TOTP_SECRET=your_pew_totp_secret_here
 `;
 
   fs.writeFileSync('.env', envContent);

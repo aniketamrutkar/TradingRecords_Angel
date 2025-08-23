@@ -11,10 +11,10 @@ const ssm = new AWS.SSM();
 // Function to get parameters from SSM
 async function getSSMParameters() {
   const parameterNames = [
-    '/trading-records/mummy/password',
-    '/trading-records/mummy/totp-secret',
-    '/trading-records/papa/password',
-    '/trading-records/papa/totp-secret',
+    '/trading-records/jpw/password',
+    '/trading-records/jpw/totp-secret',
+    '/trading-records/pew/password',
+    '/trading-records/pew/totp-secret',
     '/trading-records/email/from-address',
     '/trading-records/email/to-addresses'
   ];
@@ -46,17 +46,17 @@ const getConfig = async () => {
   
   return {
     accounts: {
-      mummy: {
-        clientcode: process.env.MUMMY_CLIENT_CODE || 'J77302',
-        password: ssmParams.mummy?.password || process.env.MUMMY_PASSWORD,
-        privateKey: process.env.MUMMY_PRIVATE_KEY || 'TUOTya6a',
-        totpSecret: ssmParams.mummy?.['totp-secret'] || process.env.MUMMY_TOTP_SECRET
+      jpw: {
+        clientcode: process.env.JPW_CLIENT_CODE || 'J77302',
+        password: ssmParams.jpw?.password || process.env.JPW_PASSWORD,
+        privateKey: process.env.JPW_PRIVATE_KEY || 'TUOTya6a',
+        totpSecret: ssmParams.jpw?.['totp-secret'] || process.env.JPW_TOTP_SECRET
       },
-      papa: {
-        clientcode: process.env.PAPA_CLIENT_CODE || 'W1573',
-        password: ssmParams.papa?.password || process.env.PAPA_PASSWORD,
-        privateKey: process.env.PAPA_PRIVATE_KEY || 'VqJ4o4G6',
-        totpSecret: ssmParams.papa?.['totp-secret'] || process.env.PAPA_TOTP_SECRET
+      pew: {
+        clientcode: process.env.PEW_CLIENT_CODE || 'W1573',
+        password: ssmParams.pew?.password || process.env.PEW_PASSWORD,
+        privateKey: process.env.PEW_PRIVATE_KEY || 'VqJ4o4G6',
+        totpSecret: ssmParams.pew?.['totp-secret'] || process.env.PEW_TOTP_SECRET
       }
     },
     api: {
@@ -119,7 +119,7 @@ function makeRequest(options, postData = null) {
 // Generate TOTP code with speakeasy library and multiple timing windows
 function generateTOTP(secret) {
   try {
-    if (!secret || secret === 'YOUR_MUMMY_TOTP_SECRET_HERE' || secret === 'YOUR_PAPA_TOTP_SECRET_HERE') {
+    if (!secret || secret === 'YOUR_JPW_TOTP_SECRET_HERE' || secret === 'YOUR_PEW_TOTP_SECRET_HERE') {
       throw new Error('TOTP secret not configured');
     }
     
@@ -347,14 +347,14 @@ function createHtmlReport(reportData, summary) {
         <h1>📈 Angel Broking Trade Report</h1>
         <p><strong>Date:</strong> ${date}</p>
         <p><strong>Generated:</strong> ${new Date().toLocaleString()}</p>
-        <p><strong>Accounts:</strong> Mummy (J77302) & Papa (W1573)</p>
+        <p><strong>Accounts:</strong> JPW (J77302) & PEW (W1573)</p>
     </div>
     
     <div class="section">
         <h2>📊 Summary</h2>
         <ul>
-            <li><strong>Mummy Orders:</strong> ${summary.mummyOrders}</li>
-            <li><strong>Papa Orders:</strong> ${summary.papaOrders}</li>
+            <li><strong>JPW Orders:</strong> ${summary.jpwOrders}</li>
+            <li><strong>PEW Orders:</strong> ${summary.pewOrders}</li>
             <li><strong>Buy Transactions:</strong> ${summary.buyTransactions}</li>
             <li><strong>Sell Transactions:</strong> ${summary.sellTransactions}</li>
         </ul>
@@ -509,35 +509,35 @@ exports.handler = async (event, context) => {
     const config = await getConfig();
     
     // Validate that we have the required configuration
-    if (!config.accounts.mummy.password || !config.accounts.mummy.totpSecret ||
-        !config.accounts.papa.password || !config.accounts.papa.totpSecret ||
+    if (!config.accounts.jpw.password || !config.accounts.jpw.totpSecret ||
+        !config.accounts.pew.password || !config.accounts.pew.totpSecret ||
         !config.email.fromEmail) {
       throw new Error('Missing required configuration parameters');
     }
     
     logWithTimestamp('=== LOGIN PHASE ===');
     // Login to both accounts
-    const [mummyToken, papaToken] = await Promise.all([
-      login('mummy', config),
-      login('papa', config)
+    const [jpwToken, pewToken] = await Promise.all([
+      login('jpw', config),
+      login('pew', config)
     ]);
     
     logWithTimestamp('=== DATA FETCH PHASE ===');
     // Fetch OrderBook from both accounts
-    const [mummyOrderBook, papaOrderBook] = await Promise.all([
-      getOrderBook('mummy', mummyToken, config),
-      getOrderBook('papa', papaToken, config)
+    const [jpwOrderBook, pewOrderBook] = await Promise.all([
+      getOrderBook('jpw', jpwToken, config),
+      getOrderBook('pew', pewToken, config)
     ]);
     
     logWithTimestamp('=== PROCESSING PHASE ===');
     // Process the trade data
-    const processedData = processTradeData(papaOrderBook.data, mummyOrderBook.data);
+    const processedData = processTradeData(pewOrderBook.data, jpwOrderBook.data);
     
     logWithTimestamp('=== EMAIL REPORT PHASE ===');
     // Create summary for email
     const summary = {
-      mummyOrders: mummyOrderBook.data.length,
-      papaOrders: papaOrderBook.data.length,
+      jpwOrders: jpwOrderBook.data.length,
+      pewOrders: pewOrderBook.data.length,
       buyTransactions: processedData.buyData.length,
       sellTransactions: processedData.sellData.length
     };
@@ -547,8 +547,8 @@ exports.handler = async (event, context) => {
     const textBody = `Angel Broking Trade Report for ${processedData.date}
 
 Summary:
-- Mummy Orders: ${summary.mummyOrders}
-- Papa Orders: ${summary.papaOrders} 
+- JPW Orders: ${summary.jpwOrders}
+- PEW Orders: ${summary.pewOrders} 
 - Buy Transactions: ${summary.buyTransactions}
 - Sell Transactions: ${summary.sellTransactions}
 

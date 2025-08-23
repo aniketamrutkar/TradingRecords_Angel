@@ -66,8 +66,8 @@ TradeRecords/
 ├── setup-totp.js            # Setup helper
 ├── logs/                    # Daily log files
 ├── bkp/[Month]/[Date].txt   # Generated reports
-├── response-jpw.json        # Latest Mummy data
-└── response-pew.json        # Latest Papa data
+├── response-jpw.json        # Latest JPW data
+└── response-pew.json        # Latest PEW data
 ```
 
 ## 🎛️ Available Commands
@@ -112,10 +112,10 @@ To change the schedule, edit `config.json`:
 When running, you'll see:
 ```
 🚀 Starting automated Angel Broking data fetch...
-🔑 Generated TOTP for mummy: 123456
-🔐 Logging in to mummy account (J77302)...
-✅ mummy login successful
-📊 Fetching OrderBook for mummy account...
+🔑 Generated TOTP for jpw: 123456
+🔐 Logging in to jpw account (J77302)...
+✅ jpw login successful
+📊 Fetching OrderBook for jpw account...
 ✅ Complete automated process finished successfully!
 ```
 
