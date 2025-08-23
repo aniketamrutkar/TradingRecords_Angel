@@ -3,7 +3,7 @@
 This project automatically fetches trade data from Angel Broking APIs and generates comprehensive trading reports. Now available in both **local** and **AWS Lambda serverless** versions!
 
 ## 🚨 **SECURITY WARNING**
-**NEVER commit `data/config.json` to public repositories!** This file contains TOTP secrets equivalent to your 2FA device. See [SECURITY.md](SECURITY.md) for details.
+**NEVER commit `data/config.json` to public repositories!** This file contains TOTP secrets equivalent to your 2FA device. See [SECURITY.md](docs/SECURITY.md) for details.
 
 ## ✨ Choose Your Deployment
 
@@ -179,3 +179,14 @@ node fetch-trade-data.js --help
 - TOTP codes are not stored permanently
 - Credentials are in the script for automation
 - JWT tokens are temporary and expire after use
+
+## 📚 Documentation
+
+For detailed guides and troubleshooting, see the [`docs/`](docs/) folder:
+
+- **[AWS Lambda Guide](docs/AWS-LAMBDA-GUIDE.md)** - Complete serverless deployment guide
+- **[Lambda Quick Start](docs/LAMBDA-QUICK-START.md)** - Fast AWS Lambda setup
+- **[Automation Guide](docs/AUTOMATION-GUIDE.md)** - Local automation setup
+- **[Project Structure](docs/PROJECT-STRUCTURE.md)** - Detailed file organization
+- **[Security Guide](docs/SECURITY.md)** - Security best practices
+- **[Troubleshooting](docs/TROUBLESHOOTING.md)** - Common issues and solutions
